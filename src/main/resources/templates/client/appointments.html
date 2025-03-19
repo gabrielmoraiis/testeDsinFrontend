@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Meus Agendamentos</title>
+</head>
+<body class="bg-gray-900">
+<nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-start">
+            <div class="space-x-4 text-white">
+                <a href="/client/profile">Perfil</a>
+                <a href="/client/services" >Serviços</a>
+                <a href="/client/appointments" class="rounded-md bg-gray-900 px-3 py-2">Agendamentos</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mx-auto mt-8">
+    <h2 class="text-center text-2xl mb-4 text-white">Meus Agendamentos</h2>
+
+    <form >
+        <div class="flex justify-center gap-4">
+            <input type="datetime-local" name="startDate" id="startDate" class="px-4 py-2 rounded" />
+            <input type="datetime-local" name="endDate" id="endDate" class="px-4 py-2 rounded" />
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filtrar</button>
+        </div>
+    </form>
+
+    <div class="max-w-md mx-auto mt-10">
+        <form method="post">
+            <div th:each="appointments : ${appointments}" class="text-white bg-gray-800 rounded-lg p-4 shadow-md mb-4 text-center">
+                <input type="hidden" name="appointmentId" th:value="${appointments.id}">
+                <h3 th:text="${appointments.service.name}"></h3>
+                <p class="mt-2">Status: <span th:text="${appointments.status}"></span></p>
+                <p class="mt-2">Data: <span th:text="${appointments.appointmentDate}"></span></p>
+                <p class="mt-2">Preço: <span th:text="${appointments.service.price}" ></span></p>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
